@@ -11,10 +11,17 @@ describe("Check the main page", () => {
     mainPage.viewPort();
   });
 
-  it("Header shoul contain phone numbers, email and schedule", () => {
-    cy.get(".header__logo-img > .attachment-full").click();
-    cy.get(":nth-child(1) > .phones > :nth-child(1) > .phones-item__link")
-      .should("have.text", contacts.managerPhoneNum)
+  it("Check the header", () => {
+    cy.get(".header__logo-img").click();
+    cy.get(".header-top__right-contacts")
+      .find(".contacts-item:nth-child(1)")
+      .find(".phones-item__link")
+      .should("include.text", contacts.managerPhoneNum)
+      .and("have.attr", "href");
+    cy.get(".header-top__right-contacts")
+      .find(".contacts-item:nth-child(2)")
+      .find(".phones-item__link")
+      .should("include.text", contacts.mainPhoneNum)
       .and("have.attr", "href");
     cy.get(".d-md-block > .emails > .emails-item > .emails-item__link").should(
       "have.text",
@@ -26,14 +33,19 @@ describe("Check the main page", () => {
     );
   });
 
-  it("Footer should contain links", () => {
-    cy.get(".footer-top").scrollIntoView();
-    cy.get(".footer__logo-img > .attachment-full");
-    cy.get(".footer-top").scrollIntoView();
-    cy.get(".footer-top__col-logo > .socials")
+  it("Check the footer", () => {
+    mainPage.scrollToFooter();
+    cy.get(".footer__logo-img");
+    mainPage.scrollToFooter();
+    cy.get(".footer-top__col-logo")
       .find("a.socials-link")
       .should("have.length", 4);
-    cy.get("#nav_menu-2 > .footer-col-title").should("have.text", "Навігація");
+    cy.get("h4.footer-col-title").should(
+      "include.text",
+      "Навігація",
+      "Каталог",
+      "Контакти"
+    );
     cy.get("#menu-menyu-v-pidvali-1")
       .find(".menu-item")
       .should("have.length", 7);
@@ -42,24 +54,24 @@ describe("Check the main page", () => {
       .each(($el, index, $list) => {
         cy.wrap($el).find("a").should("have.attr", "href");
       });
-    cy.get(".footer-top__col-contacts > .footer-col-title").should(
-      "have.text",
-      "Контакти"
-    );
+    cy.get(".menu-menyu-v-pidvali-1-container")
+      .find(".menu-item")
+      .each(($el, index, $list) => {
+        cy.wrap($el).find("a").should("have.attr", "href");
+      });
     cy.get(".footer-top__col-contacts > :nth-child(3)")
       .find(".phones-item")
       .each(($el, index, $list) => {
         cy.wrap($el).find("a").should("have.attr", "href");
       });
-    cy.get(
-      ".footer-top__col-contacts > :nth-child(3) > .phones > :nth-child(2) > .phones-item__link"
-    ).should("have.text", contacts.mainPhoneNum);
-    cy.get(
-      ".footer-top__col-contacts > :nth-child(4) > .emails > .emails-item > .emails-item__link"
-    ).should("have.attr", "href");
+    cy.get(".footer-top__col-contacts")
+      .find(".emails-item")
+      .find(".emails-item__link")
+      .should("have.text", contacts.email)
+      .and("have.attr", "href");
   });
 
-  it("Should open messangers menu", () => {
+  it("Check the messanger's menu", () => {
     cy.get(".messengers-btn-wrapper").click();
     cy.get(".messengers-popup")
       .find(".messengers-popup__item")

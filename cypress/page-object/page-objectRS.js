@@ -9,4 +9,8 @@ export class MainPage {
   viewPort() {
     cy.viewport(1280, 750);
   }
+
+  scrollToFooter() {
+    cy.get(".footer-top").scrollIntoView();
+  }
 }
