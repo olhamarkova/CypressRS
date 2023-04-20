@@ -74,6 +74,7 @@ describe("Check the main page", () => {
   });
 
   it("Check the messanger's menu", () => {
+    cy.get(".messengers-btn-wrapper").should("be.visible");
     cy.get(".messengers-btn-wrapper").click();
     cy.get(".messengers-popup")
       .find(".messengers-popup__item")
@@ -82,5 +83,9 @@ describe("Check the main page", () => {
 
   it("Check the review block", () => {
     cy.get(".slider-button--next").click({ force: true });
+    cy.get("#reviews-slider")
+      .find(".reviews-item__inner")
+      .eq(2)
+      .should("include.text", "Олександра");
   });
 });

@@ -14,5 +14,6 @@ describe("Check the portfolio page", () => {
       cy.get("button.is-next").click();
     }
     cy.get("button[title='Close']").click();
+    cy.get(".messengers-btn-wrapper").should("be.visible");
   });
 });
