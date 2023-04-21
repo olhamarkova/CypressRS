@@ -71,6 +71,10 @@ describe("Check the main page", () => {
       .find(".emails-item__link")
       .should("have.text", contacts.email)
       .and("have.attr", "href");
+
+    cy.get("a.privacy-policy-link")
+      .should("have.text", "Політика конфіденційності")
+      .and("have.attr", "href");
   });
 
   it("Check the messanger's menu", () => {
