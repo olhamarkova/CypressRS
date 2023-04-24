@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 
 import { MainPage } from "../../page-object/page-object-main.js";
-import { contacts } from "../../fixtures/page-data.js";
 
 const mainPage = new MainPage();
 
@@ -11,73 +10,7 @@ describe("Check the main page", () => {
     mainPage.viewPort();
   });
 
-  it("Check the header", () => {
-    cy.get(".header__logo-img").click();
-
-    cy.get(".phones:nth-child(1)").each(($el, index, $list) => {
-      cy.wrap($el).find("a").should("have.attr", "href");
-    });
-
-    cy.get(".header-top__right-contacts")
-      .find(".phones-item__link")
-      .should("include.text", contacts.mainPhoneNum, contacts.managerPhoneNum);
-
-    cy.get(".header-top__right-contacts")
-      .find(".emails-item__link")
-      .should("include.text", contacts.email);
-
-    cy.get(".schedule").should("include.text", "Графік роботи:");
-  });
-
-  it("Check the footer", () => {
-    mainPage.scrollToFooter();
-    cy.get(".footer__logo-img");
-
-    mainPage.scrollToFooter();
-    cy.get(".footer-top__col-logo")
-      .find("a.socials-link")
-      .should("have.length", 4);
-
-    cy.get("h4.footer-col-title").should(
-      "include.text",
-      "Навігація",
-      "Каталог",
-      "Контакти"
-    );
-
-    cy.get("#menu-menyu-v-pidvali-1")
-      .find(".menu-item")
-      .should("have.length", 7);
-
-    cy.get("#menu-menyu-v-pidvali-1")
-      .find(".menu-item")
-      .each(($el, index, $list) => {
-        cy.wrap($el).find("a").should("have.attr", "href");
-      });
-
-    cy.get(".menu-menyu-v-pidvali-1-container")
-      .find(".menu-item")
-      .each(($el, index, $list) => {
-        cy.wrap($el).find("a").should("have.attr", "href");
-      });
-
-    cy.get(".footer-top__col-contacts :nth-child(3)")
-      .find(".phones-item")
-      .each(($el, index, $list) => {
-        cy.wrap($el).find("a").should("have.attr", "href");
-      });
-
-    cy.get(".footer-top__col-contacts")
-      .find(".emails-item__link")
-      .should("have.text", contacts.email)
-      .and("have.attr", "href");
-
-    cy.get("a.privacy-policy-link")
-      .should("have.text", "Політика конфіденційності")
-      .and("have.attr", "href");
-  });
-
-  it("Check the messanger's menu", () => {
+  it("Check the messenger's menu", () => {
     cy.get(".messengers-btn-wrapper").should("be.visible");
     cy.get(".messengers-btn-wrapper").click();
     cy.get(".messengers-popup")
@@ -91,5 +24,43 @@ describe("Check the main page", () => {
       .find(".reviews-item__inner")
       .eq(2)
       .should("include.text", "Олександра");
+  });
+
+  it("Check the Blog Section", () => {
+    cy.get(".blog-home-section h2.section-title").should(
+      "have.text",
+      "Наш блог"
+    );
+    cy.get(".blog-item__top").should("have.length", 3);
+  });
+
+  it("Check the links in the Blog Section", () => {
+    cy.get("a.section-link").should("have.attr", "href");
+    cy.get("a.section-link").click({ force: true });
+    cy.url().should("include", "blog");
+    cy.go("back");
+    cy.url().should("include", "royalstone");
+
+    cy.get(".blog-item__title").eq(1).click();
+    cy.get("a span[itemprop='name']").eq(1).should("have.text", "Блог");
+  });
+
+  it("Check the Catalog button", () => {
+    cy.get(".btn-border").should("have.text", "Наш каталог");
+    cy.get(".btn-border").click({ force: true });
+    cy.url().should("contain", "catalog");
+    cy.go("back");
+    cy.url().should("include", "royalstone");
+  });
+
+  it("Check the Call to Action button", () => {
+    cy.get(".hero-section__desc .btn-accent").should(
+      "have.text",
+      "Замовити дзвінок"
+    );
+    cy.get(".hero-section__desc .btn-accent").click({ force: true });
+    cy.get("#wpforms-submit-135").should("be.visible");
+    cy.get(".is-close-btn").click();
+    cy.get(".hero-bg-wrapper").should("be.visible");
   });
 });
