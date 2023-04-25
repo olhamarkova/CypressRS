@@ -19,12 +19,12 @@ describe("Check the Call to Action section", () => {
   });
 
   it("Check the Buttons", () => {
-    cy.get(".btn-border").click();
+    blogPage.partnerButton();
     cy.url().should("contain", "spivpraczya");
-    cy.go("back");
-    cy.get(".cta-section__content .btn-accent").click();
+    blogPage.goBack();
+    blogPage.openForm();
     cy.get("#wpforms-submit-135").should("be.visible");
-    cy.get(".is-close-btn").click();
+    blogPage.closeModalWindow();
     cy.get(".cta-section__content .btn-accent").should("be.visible");
   });
 });

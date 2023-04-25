@@ -12,14 +12,14 @@ describe("Check the main page", () => {
 
   it("Check the messenger's menu", () => {
     cy.get(".messengers-btn-wrapper").should("be.visible");
-    cy.get(".messengers-btn-wrapper").click();
+    mainPage.openMessengers();
     cy.get(".messengers-popup")
       .find(".messengers-popup__item")
       .should("have.length", 6);
   });
 
   it("Check the review block", () => {
-    cy.get(".slider-button--next").click({ force: true });
+    mainPage.nextReview();
     cy.get("#reviews-slider")
       .find(".reviews-item__inner")
       .eq(2)
@@ -36,20 +36,20 @@ describe("Check the main page", () => {
 
   it("Check the links in the Blog Section", () => {
     cy.get("a.section-link").should("have.attr", "href");
-    cy.get("a.section-link").click({ force: true });
+    mainPage.openBlog();
     cy.url().should("include", "blog");
-    cy.go("back");
+    mainPage.goBack();
     cy.url().should("include", "royalstone");
 
-    cy.get(".blog-item__title").eq(1).click();
-    cy.get("a span[itemprop='name']").eq(1).should("have.text", "Блог");
+    mainPage.openArticle();
+    cy.get("a span[itemprop='name']").eq(1).should("have.text", "Наш блог");
   });
 
   it("Check the Catalog button", () => {
     cy.get(".btn-border").should("have.text", "Наш каталог");
-    cy.get(".btn-border").click({ force: true });
+    mainPage.openCatalog();
     cy.url().should("contain", "catalog");
-    cy.go("back");
+    mainPage.goBack();
     cy.url().should("include", "royalstone");
   });
 
@@ -58,9 +58,9 @@ describe("Check the main page", () => {
       "have.text",
       "Замовити дзвінок"
     );
-    cy.get(".hero-section__desc .btn-accent").click({ force: true });
+    mainPage.openForm();
     cy.get("#wpforms-submit-135").should("be.visible");
-    cy.get(".is-close-btn").click();
+    mainPage.closeForm();
     cy.get(".hero-bg-wrapper").should("be.visible");
   });
 });

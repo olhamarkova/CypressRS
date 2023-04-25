@@ -9,11 +9,11 @@ describe("Check the portfolio page", () => {
     portfolio.navigate();
     cy.get(".hero-parallax-section__title").should("have.text", "Наші роботи");
     cy.get(".portfolio-gallery__item").should("have.length", 20);
-    cy.get(".portfolio-gallery__item").eq(1).click();
+    portfolio.openGallery();
     for (let n = 0; n < 5; n++) {
-      cy.get("button.is-next").click();
+      portfolio.nextPhoto();
     }
-    cy.get("button[title='Close']").click();
+    portfolio.closeGallery();
     cy.get(".messengers-btn-wrapper").should("be.visible");
   });
 });

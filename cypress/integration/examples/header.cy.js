@@ -13,7 +13,7 @@ describe("Check the Header", () => {
 
   it("Check the logo", () => {
     cy.get(".header__logo-img").should("be.visible");
-    cy.get(".header__logo-img").click();
+    mainPage.reload();
     cy.url().should("include", "royalstone");
   });
 
