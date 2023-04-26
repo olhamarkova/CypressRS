@@ -18,4 +18,12 @@ export class PortfolioPage {
   closeGallery() {
     cy.get("button[title='Close']").click();
   }
+
+  checkHeader(text) {
+    cy.get(".hero-parallax-section__title").should("have.text", text);
+  }
+
+  checkPhotosCount(count) {
+    cy.get(".portfolio-gallery__item").should("have.length", count);
+  }
 }

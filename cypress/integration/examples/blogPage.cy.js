@@ -10,24 +10,24 @@ describe("Check the Call to Action section", () => {
   });
 
   it("Check the Actual Articles Section", () => {
-    cy.get(".blog-top-item--big").should("be.visible").and("have.length", 1);
-    cy.get(".blog-top-item--small").should("be.visible").and("have.length", 2);
+    blogPage.checkBigBlogItem(1);
+    blogPage.checkSmallBlogItem(2);
   });
 
   it("Check the Count of Articles on the Main Blog Page", () => {
-    cy.get(".blog-list-item-col").should("have.length", 6);
+    blogPage.checkArticlesCount(6);
     blogPage.openMore();
-    cy.get(".blog-list-item-col").should("have.length", 12);
+    blogPage.checkArticlesCount(12);
   });
 
   it("Check the Article Page", () => {
-    blogPage.openArticle();
-    cy.get(".content").should("be.visible");
+    blogPage.openArticle(1);
+    blogPage.checkArticleContent();
     blogPage.wait();
-    cy.get(".share-item__link").should("have.length", 7);
-    cy.get(".post-nav").should("be.visible");
-    cy.get(".post-nav__prev a").should("have.attr", "href");
-    cy.get(".post-nav__next a").should("have.attr", "href");
-    cy.get(".blog-item-col").should("be.visible").and("have.length", 3);
+    blogPage.checkShareLinks(7);
+    blogPage.checkPostNavPanel();
+    blogPage.checkNavPanelLinks("prev");
+    blogPage.checkNavPanelLinks("next");
+    blogPage.checkPopularSection(3);
   });
 });

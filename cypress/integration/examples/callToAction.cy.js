@@ -1,8 +1,10 @@
 /// <reference types="cypress" />
 
 import { Blog } from "../../page-object/page-object-blog.js";
+import { MainPage } from "../../page-object/page-object-main.js";
 
 const blogPage = new Blog();
+const mainPage = new MainPage();
 
 describe("Check the Call to Action section", () => {
   beforeEach(() => {
@@ -11,20 +13,17 @@ describe("Check the Call to Action section", () => {
   });
 
   it("Check the Call to Action section", () => {
-    cy.get(".cta-section__content").should("be.visible");
-    cy.get(".cta-section__content h3").should(
-      "have.text",
-      "Запрошуємо до співпраці з нами!"
-    );
+    blogPage.checkCTASectionContent();
+    blogPage.checkCTAHeader("Запрошуємо до співпраці з нами!");
   });
 
   it("Check the Buttons", () => {
     blogPage.partnerButton();
-    cy.url().should("contain", "spivpraczya");
+    mainPage.linkValidation("spivpraczya");
     blogPage.goBack();
     blogPage.openForm();
-    cy.get("#wpforms-submit-135").should("be.visible");
+    mainPage.formButtonValidation();
     blogPage.closeModalWindow();
-    cy.get(".cta-section__content .btn-accent").should("be.visible");
+    blogPage.checkCTAButton();
   });
 });
