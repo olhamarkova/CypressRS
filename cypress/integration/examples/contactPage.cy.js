@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import { ContactsPage } from "../../page-object/page-object-contacts.js";
-import { contacts } from "../../fixtures/page-data.js";
+import { contacts } from "../../fixtures/contacts-data.js";
 
 const contPage = new ContactsPage();
 

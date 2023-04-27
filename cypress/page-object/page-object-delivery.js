@@ -1,10 +1,10 @@
 /// <reference types="cypress" />
 
-import { contacts } from "../fixtures/page-data.js";
+import { siteURLs } from "../fixtures/page-data.js";
 
 export class Delivery {
   navigate() {
-    cy.visit(contacts.delivery);
+    cy.visit(siteURLs.delivery);
   }
 
   checkDeliveryHeader(text) {

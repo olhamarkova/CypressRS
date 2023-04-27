@@ -1,10 +1,10 @@
 /// <reference types="cypress" />
 
-import { contacts } from "../fixtures/page-data.js";
+import { siteURLs } from "../fixtures/page-data.js";
 
 export class Blog {
   navigate() {
-    cy.visit(contacts.blog);
+    cy.visit(siteURLs.blog);
   }
 
   scroll() {

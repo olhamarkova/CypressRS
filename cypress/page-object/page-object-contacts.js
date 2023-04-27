@@ -1,10 +1,10 @@
 /// <reference types="cypress" />
 
-import { contacts } from "../fixtures/page-data.js";
+import { siteURLs } from "../fixtures/page-data.js";
 
 export class ContactsPage {
   navigate() {
-    cy.visit(contacts.contacts);
+    cy.visit(siteURLs.contacts);
   }
 
   checkAddress(text) {

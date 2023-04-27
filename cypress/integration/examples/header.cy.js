@@ -1,25 +1,47 @@
 /// <reference types="cypress" />
 
-import { MainPage } from "../../page-object/page-object-main.js";
+import { Header } from "../../page-object/page-object-header.js";
+import { Dimensions } from "../../page-object/dimensions.js";
 
-const mainPage = new MainPage();
+const header = new Header();
+const viewport = new Dimensions();
 
-describe("Check the Header", () => {
+describe("Check the Header on Desktop", () => {
   beforeEach(() => {
-    mainPage.navigate();
-    mainPage.viewPort();
+    header.navigate();
+    viewport.desktopView();
   });
 
   it("Check the logo", () => {
-    mainPage.checkMainLogo();
-    mainPage.reload();
-    mainPage.linkValidation("royalstone");
+    header.checkMainLogo();
+    header.reload();
+    header.linkValidation("royalstone");
   });
 
   it("Check the Contacts Section", () => {
-    mainPage.contactSectionValidation();
-    mainPage.phoneNumValidation();
-    mainPage.emailValidation();
-    mainPage.scheduleValidation("Графік роботи:");
+    header.contactSectionValidation();
+    header.phoneNumValidation();
+    header.emailValidation();
+    header.scheduleValidation("Графік роботи:");
+  });
+});
+
+describe("Check the Header on Mobile Screen", () => {
+  beforeEach(() => {
+    header.navigate();
+    viewport.mobileView();
+  });
+
+  it("Check the Logo", () => {
+    header.checkMainLogo();
+  });
+
+  it("Check the Contacts Section", () => {
+    header.contactSectionValidation();
+    header.phoneNumValidation();
+  });
+
+  it("Check the Mobile Menu", () => {
+    header.mobNavigation();
   });
 });

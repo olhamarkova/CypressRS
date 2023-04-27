@@ -1,13 +1,15 @@
 /// <reference types="cypress" />
 
 import { MainPage } from "../../page-object/page-object-main.js";
+import { Dimensions } from "../../page-object/dimensions.js";
 
 const mainPage = new MainPage();
+const viewport = new Dimensions();
 
-describe("Check the main page", () => {
+describe("Check the Main Page on Desktop", () => {
   beforeEach(() => {
     mainPage.navigate();
-    mainPage.viewPort();
+    viewport.desktopView();
   });
 
   it("Check the messenger's menu", () => {
@@ -32,8 +34,7 @@ describe("Check the main page", () => {
     mainPage.linkValidation("blog");
     mainPage.goBack();
     mainPage.linkValidation("royalstone");
-
-    mainPage.openArticle();
+    mainPage.openArticle(1);
     mainPage.breadcrumpsValidation("Наш блог");
   });
 
@@ -51,5 +52,18 @@ describe("Check the main page", () => {
     mainPage.formButtonValidation();
     mainPage.closeForm();
     mainPage.heroSectionValidation();
+  });
+});
+
+describe("Check the Main Page on Mobile Screen", () => {
+  beforeEach(() => {
+    mainPage.navigate();
+    viewport.mobileView();
+  });
+
+  it("Check the Blog Section", () => {
+    mainPage.checkArticlesCount(3);
+    mainPage.mobCheckArticlesCount();
+    mainPage.checkBlogLink();
   });
 });
