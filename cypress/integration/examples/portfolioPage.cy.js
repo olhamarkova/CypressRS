@@ -15,9 +15,12 @@ describe("Check the Portfolio Page on Desktop", () => {
     portfolio.checkHeader("Наші роботи");
     portfolio.checkPhotosCount(20);
     portfolio.openGallery(2);
+    portfolio.navButtonValidation("next");
     for (let n = 0; n < 5; n++) {
       portfolio.nextPhoto();
     }
+    portfolio.navButtonValidation("prev");
+    portfolio.closeButtonValidation();
     portfolio.closeGallery();
     mainPage.mesButtonValidation();
   });

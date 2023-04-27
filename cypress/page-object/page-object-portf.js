@@ -11,8 +11,16 @@ export class PortfolioPage {
     cy.get(".portfolio-gallery__item").eq(index).click({ force: true });
   }
 
+  navButtonValidation(button) {
+    cy.get(`button.is-${button}`).should("be.visible");
+  }
+
   nextPhoto() {
     cy.get("button.is-next").click({ force: true });
+  }
+
+  closeButtonValidation() {
+    cy.get("button[title='Close']").should("be.visible");
   }
 
   closeGallery() {
