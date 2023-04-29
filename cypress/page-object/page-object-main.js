@@ -98,6 +98,16 @@ export class MainPage {
     cy.get(".hero-bg-wrapper").should("be.visible");
   }
 
+  //our advantages section
+
+  ourAdvantagesCheck() {
+    cy.get("#advantages").should("be.visible");
+  }
+
+  ourAdvantagesItems(count) {
+    cy.get(".advantages-item").should("have.length", count);
+  }
+
   //mobile validation
 
   mobCheckArticlesCount() {

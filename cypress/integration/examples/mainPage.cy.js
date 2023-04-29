@@ -18,6 +18,11 @@ describe("Check the Main Page on Desktop", () => {
     mainPage.checkMessengersCount(6);
   });
 
+  it("Check the Our Adventages Section", () => {
+    mainPage.ourAdvantagesCheck();
+    mainPage.ourAdvantagesItems(4);
+  });
+
   it("Check the review block", () => {
     mainPage.nextReview();
     mainPage.reviewTextValidation(2, "Олександра");
