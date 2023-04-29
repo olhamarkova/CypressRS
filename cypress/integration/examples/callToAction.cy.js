@@ -1,14 +1,14 @@
 /// <reference types="cypress" />
 
-import { CallToAction } from "../../page-object/page-object-CTA.js";
-import { MainPage } from "../../page-object/page-object-main.js";
+import { SharedModules } from "../../page-object/shared-modules.js";
+import { Blog } from "../../page-object/page-object-blog.js";
 
-const ctaSection = new CallToAction();
-const mainPage = new MainPage();
+const url = new Blog();
+const ctaSection = new SharedModules();
 
 describe("Check the Call to Action section", () => {
   beforeEach(() => {
-    ctaSection.navigate();
+    url.navigate();
     ctaSection.scroll();
   });
 
@@ -19,10 +19,10 @@ describe("Check the Call to Action section", () => {
 
   it("Check the Buttons", () => {
     ctaSection.partnerButton();
-    mainPage.linkValidation("spivpraczya");
+    ctaSection.linkValidation("spivpraczya");
     ctaSection.goBack();
     ctaSection.openForm();
-    mainPage.formButtonValidation();
+    ctaSection.formButtonValidation();
     ctaSection.closeModalWindow();
     ctaSection.checkCTAButton();
   });

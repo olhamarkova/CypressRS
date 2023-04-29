@@ -1,11 +1,11 @@
 /// <reference types="cypress" />
 
 import { PortfolioPage } from "../../page-object/page-object-portf.js";
-import { MainPage } from "../../page-object/page-object-main.js";
+import { SharedModules } from "../../page-object/shared-modules.js";
 import { Dimensions } from "../../page-object/dimensions.js";
 
 const portfolio = new PortfolioPage();
-const mainPage = new MainPage();
+const modules = new SharedModules();
 const viewport = new Dimensions();
 
 describe("Check the Portfolio Page on Desktop", () => {
@@ -22,6 +22,6 @@ describe("Check the Portfolio Page on Desktop", () => {
     portfolio.navButtonValidation("prev");
     portfolio.closeButtonValidation();
     portfolio.closeGallery();
-    mainPage.mesButtonValidation();
+    modules.mesButtonValidation();
   });
 });

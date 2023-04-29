@@ -12,8 +12,4 @@ export class ProductPage {
   checkGallery() {
     cy.get(".gallery-section").should("be.visible");
   }
-
-  checkOurAdvSection() {
-    cy.get(".advantages-section").should("be.visible");
-  }
 }

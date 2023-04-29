@@ -4,12 +4,12 @@ import { Blog } from "../../page-object/page-object-blog.js";
 
 const blogPage = new Blog();
 
-describe("Check the Call to Action section", () => {
+describe("Check the Blog Page", () => {
   beforeEach(() => {
     blogPage.navigate();
   });
 
-  it("Check the Actual Articles Section", () => {
+  it.only("Check the Actual Articles Section", () => {
     blogPage.checkBigBlogItem(1);
     blogPage.checkSmallBlogItem(2);
   });

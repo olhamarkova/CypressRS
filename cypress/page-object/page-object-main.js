@@ -7,12 +7,8 @@ export class MainPage {
     cy.visit(siteURLs.url);
   }
 
-  openMessengers() {
-    cy.get(".messengers-btn-wrapper").click();
-  }
-
-  nextReview() {
-    cy.get(".slider-button--next").click({ force: true });
+  linkValidation(text) {
+    cy.url().should("include", text);
   }
 
   openBlog() {
@@ -31,10 +27,6 @@ export class MainPage {
     cy.get(".hero-section__desc .btn-accent").click({ force: true });
   }
 
-  closeForm() {
-    cy.get(".is-close-btn").click();
-  }
-
   goBack() {
     cy.go("back");
   }
@@ -44,23 +36,6 @@ export class MainPage {
   }
 
   //page body validation
-
-  mesButtonValidation() {
-    cy.get(".messengers-btn-wrapper").should("be.visible");
-  }
-
-  checkMessengersCount(count) {
-    cy.get(".messengers-popup")
-      .find(".messengers-popup__item")
-      .should("have.length", count);
-  }
-
-  reviewTextValidation(index, text) {
-    cy.get("#reviews-slider")
-      .find(".reviews-item__inner")
-      .eq(index)
-      .should("include.text", text);
-  }
 
   blogHeaderValidation(text) {
     cy.get("#blog-3-posts h2.section-title").should("have.text", text);
@@ -72,10 +47,6 @@ export class MainPage {
 
   checkBlogLink() {
     cy.get("a.section-link").should("be.visible").and("have.attr", "href");
-  }
-
-  linkValidation(text) {
-    cy.url().should("include", text);
   }
 
   breadcrumpsValidation(text) {
@@ -90,22 +61,8 @@ export class MainPage {
     cy.get(".hero-section__desc .btn-accent").should("have.text", text);
   }
 
-  formButtonValidation() {
-    cy.get("#wpforms-submit-135").should("be.visible");
-  }
-
   heroSectionValidation() {
     cy.get(".hero-bg-wrapper").should("be.visible");
-  }
-
-  //our advantages section
-
-  ourAdvantagesCheck() {
-    cy.get("#advantages").should("be.visible");
-  }
-
-  ourAdvantagesItems(count) {
-    cy.get(".advantages-item").should("have.length", count);
   }
 
   //mobile validation

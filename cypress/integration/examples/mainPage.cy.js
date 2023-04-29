@@ -1,10 +1,12 @@
 /// <reference types="cypress" />
 
 import { MainPage } from "../../page-object/page-object-main.js";
+import { SharedModules } from "../../page-object/shared-modules.js";
 import { Dimensions } from "../../page-object/dimensions.js";
 
 const mainPage = new MainPage();
 const viewport = new Dimensions();
+const modules = new SharedModules();
 
 describe("Check the Main Page on Desktop", () => {
   beforeEach(() => {
@@ -13,19 +15,19 @@ describe("Check the Main Page on Desktop", () => {
   });
 
   it("Check the messenger's menu", () => {
-    mainPage.mesButtonValidation();
-    mainPage.openMessengers();
-    mainPage.checkMessengersCount(6);
+    modules.mesButtonValidation();
+    modules.openMessengers();
+    modules.checkMessengersCount(6);
   });
 
   it("Check the Our Adventages Section", () => {
-    mainPage.ourAdvantagesCheck();
-    mainPage.ourAdvantagesItems(4);
+    modules.ourAdvantagesCheck();
+    modules.ourAdvantagesItems(4);
   });
 
   it("Check the review block", () => {
-    mainPage.nextReview();
-    mainPage.reviewTextValidation(2, "Олександра");
+    modules.nextReview();
+    modules.reviewTextValidation(2, "Олександра");
   });
 
   it("Check the Blog Section", () => {
@@ -53,9 +55,9 @@ describe("Check the Main Page on Desktop", () => {
 
   it("Check the Call to Action button", () => {
     mainPage.callToActionValidation("Замовити дзвінок");
-    mainPage.openForm();
-    mainPage.formButtonValidation();
-    mainPage.closeForm();
+    modules.openForm();
+    modules.formButtonValidation();
+    modules.closeModalWindow();
     mainPage.heroSectionValidation();
   });
 });

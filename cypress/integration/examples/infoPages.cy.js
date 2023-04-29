@@ -1,10 +1,10 @@
 /// <reference types="cypress" />
 
-import { CallToAction } from "../../page-object/page-object-CTA.js";
+import { SharedModules } from "../../page-object/shared-modules.js";
 import { ProductPage } from "../../page-object/page-object-info.js";
 import { infoPages } from "../../fixtures/info-pages.js";
 
-const page = new CallToAction();
+const modules = new SharedModules();
 const productPage = new ProductPage();
 
 describe("Info Pages Check", () => {
@@ -15,8 +15,9 @@ describe("Info Pages Check", () => {
       productPage.navigate(url);
       productPage.checkContent();
       productPage.checkGallery();
-      productPage.checkOurAdvSection();
-      page.checkCTASectionContent();
+      modules.ourAdvantagesCheck();
+      modules.checkCTASectionContent();
+      modules.mesButtonValidation();
     });
   });
 });
