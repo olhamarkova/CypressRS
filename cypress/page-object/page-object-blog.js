@@ -7,10 +7,6 @@ export class Blog {
     cy.visit(siteURLs.blog);
   }
 
-  scroll() {
-    cy.get(".cta-section__content").scrollIntoView();
-  }
-
   wait() {
     cy.wait(3000);
   }
@@ -23,20 +19,8 @@ export class Blog {
     cy.get(".loadmore-btn").click();
   }
 
-  partnerButton() {
-    cy.get(".btn-border").click();
-  }
-
   goBack() {
     cy.go("back");
-  }
-
-  closeModalWindow() {
-    cy.get(".is-close-btn").click();
-  }
-
-  openForm() {
-    cy.get(".cta-section__content .btn-accent").click();
   }
 
   //validation
@@ -74,20 +58,6 @@ export class Blog {
   }
 
   checkPopularSection(index) {
-    cy.get(".blog-item-col").should("be.visible").and("have.length", index);
-  }
-
-  //call to action section validation
-
-  checkCTASectionContent() {
-    cy.get(".cta-section__content").should("be.visible");
-  }
-
-  checkCTAHeader(text) {
-    cy.get(".cta-section__content h3").should("have.text", text);
-  }
-
-  checkCTAButton() {
-    cy.get(".cta-section__content .btn-accent").should("be.visible");
+    cy.get(".blog-item__top").should("be.visible").and("have.length", index);
   }
 }
