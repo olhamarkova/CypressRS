@@ -13,16 +13,20 @@ describe("Check the Delivery page", () => {
   });
 
   it("Check the Delivery Section", function () {
-    delivPage.checkDeliveryHeader("Способи доставки:");
-    delivPage.checkDeliveryCount(4);
+    delivPage.elements
+      .deliverySectionHeader()
+      .should("have.text", "Способи доставки:");
+    delivPage.elements.deliveryServices().should("have.length", 4);
   });
 
   it("Check the Payment Section", function () {
-    delivPage.checkPaymentHeader("Способи оплати:");
-    delivPage.checkPaymentsCount(3);
+    delivPage.elements
+      .paymentSectionHeader()
+      .should("have.text", "Способи оплати:");
+    delivPage.elements.paymentMethods().should("have.length", 3);
   });
 
   it("Check the links", function () {
-    delivPage.checkLinks("тарифами");
+    delivPage.checkDeliveryInfoLinks("тарифами");
   });
 });

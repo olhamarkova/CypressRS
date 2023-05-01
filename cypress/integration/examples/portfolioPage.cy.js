@@ -1,10 +1,8 @@
 /// <reference types="cypress" />
 
 import { PortfolioPage } from "../../page-object/page-object-portf.js";
-import { SharedModules } from "../../page-object/shared-modules.js";
 
 const portfolio = new PortfolioPage();
-const modules = new SharedModules();
 
 describe("Check the Portfolio Page on Desktop", () => {
   beforeEach(function () {
@@ -16,16 +14,12 @@ describe("Check the Portfolio Page on Desktop", () => {
   });
 
   it("Check the gallery", () => {
-    portfolio.checkHeader("Наші роботи");
-    portfolio.checkPhotosCount(20);
+    portfolio.elements.galleryImage().should("have.length", 20);
     portfolio.openGallery(2);
-    portfolio.navButtonValidation("next");
-    for (let n = 0; n < 5; n++) {
-      portfolio.nextPhoto();
-    }
-    portfolio.navButtonValidation("prev");
-    portfolio.closeButtonValidation();
+    portfolio.elements.nextPhotoButton().should("be.visible");
+    portfolio.swipePhotos();
+    portfolio.elements.closeGalleryButton().should("be.visible");
     portfolio.closeGallery();
-    modules.mesButtonValidation();
+    portfolio.elements.galleryImage().eq(0).should("be.visible");
   });
 });

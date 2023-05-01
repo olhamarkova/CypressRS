@@ -1,31 +1,24 @@
 /// <reference types="cypress" />
 
 export class PortfolioPage {
+  elements = {
+    galleryImage: () => cy.get(".img-popup"),
+    nextPhotoButton: () => cy.get("button.is-next"),
+    previousPhotoButton: () => cy.get("button.is-prev"),
+    closeGalleryButton: () => cy.get("button[title='Close']"),
+  };
+
   openGallery(index) {
-    cy.get(".img-popup").eq(index).click({ force: true });
+    this.elements.galleryImage().eq(index).click({ force: true });
   }
 
-  navButtonValidation(button) {
-    cy.get(`button.is-${button}`).should("be.visible");
-  }
-
-  nextPhoto() {
-    cy.get("button.is-next").click({ force: true });
-  }
-
-  closeButtonValidation() {
-    cy.get("button[title='Close']").should("be.visible");
+  swipePhotos() {
+    for (let n = 0; n < 5; n++) {
+      this.elements.nextPhotoButton().click({ force: true });
+    }
   }
 
   closeGallery() {
-    cy.get("button[title='Close']").click({ force: true });
-  }
-
-  checkHeader(text) {
-    cy.get(".hero-parallax-section__title").should("have.text", text);
-  }
-
-  checkPhotosCount(count) {
-    cy.get(".img-popup").should("have.length", count);
+    this.elements.closeGalleryButton().click({ force: true });
   }
 }

@@ -1,53 +1,39 @@
 /// <reference types="cypress" />
 
 export class ContactsPage {
-  checkAddress(text) {
-    cy.get(".col-xl-4:nth-child(1) .address__link")
-      .should("include.text", text)
-      .and("have.attr", "href");
-  }
-
-  checkPhoneNumbersCount(count) {
-    cy.get(".col-xl-4 :nth-child(2) .phones-item").as("phoneNumbers");
-    cy.get("@phoneNumbers").should("have.length", count);
-  }
+  elements = {
+    companyAddress: () => cy.get(".col-xl-4:nth-child(1) .address__link"),
+    companyPhoneNumbers: () => cy.get(".col-xl-4 :nth-child(2) .phones-item a"),
+    companyEmail: () => cy.get(".col-xl-4 .emails-item__link"),
+    schedule: () => cy.get(".col-xl-4 .schedule"),
+    socialButtons: () => cy.get(".col-xl-4 .socials-link"),
+    googleMap: () => cy.get("iframe"),
+    contactForm: () => cy.get(".contacts-section__form"),
+  };
 
   checkPhoneNumbersLinks() {
-    cy.get("@phoneNumbers").each(($el, index, list) => {
-      cy.wrap($el).find("a").should("have.attr", "href");
-    });
-  }
-
-  checkNumbers(index, number) {
-    cy.get("@phoneNumbers").find("a").eq(index).should("include.text", number);
-  }
-
-  checkEmail(email) {
-    cy.get(".col-xl-4 .emails-item__link")
-      .should("have.text", email)
-      .and("have.attr", "href");
-  }
-
-  checkSchedule(text) {
-    cy.get(".col-xl-4 .schedule").should("include.text", text);
-  }
-
-  checkSocialsCount(count) {
-    cy.get(".col-xl-4 .socials-link").as("socials");
-    cy.get("@socials").should("have.length", count);
-  }
-
-  checkSocialsLinks() {
-    cy.get("@socials").each(($el, index, list) => {
+    this.elements.companyPhoneNumbers().each(($el, index, list) => {
       cy.wrap($el).should("have.attr", "href");
     });
   }
 
-  checkGoogleMap() {
-    cy.get("iframe").should("be.visible");
+  checkNumbers(index, number) {
+    this.elements
+      .companyPhoneNumbers()
+      .eq(index)
+      .should("include.text", number);
   }
 
-  checkForm() {
-    cy.get(".contacts-section__form").should("be.visible");
+  checkEmail(email) {
+    this.elements
+      .companyEmail()
+      .should("have.text", email)
+      .and("have.attr", "href");
+  }
+
+  checkSocialsLinks() {
+    this.elements.socialButtons().each(($el, index, list) => {
+      cy.wrap($el).should("have.attr", "href");
+    });
   }
 }

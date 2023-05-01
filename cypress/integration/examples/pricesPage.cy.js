@@ -14,16 +14,19 @@ describe("Check the Prices Page on Desktop", () => {
   });
 
   it("Check the Table of Prices", () => {
-    pricesPage.tableCheck();
-    pricesPage.tableRowsCheck(10);
+    pricesPage.elements.pricesTable().should("be.visible");
+    pricesPage.elements.priceTableRow().should("have.length", 10);
   });
 
   it("Check the Downloads Section", () => {
-    pricesPage.downloadsSectionCheck();
-    pricesPage.countOfSectionsValidation(2);
-    pricesPage.countOfFilesCheck("title", 6);
-    pricesPage.checkLinks("title");
-    pricesPage.countOfFilesCheck("icon", 6);
-    pricesPage.checkLinks("icon");
+    pricesPage.elements.downloadsSection().should("be.visible");
+    pricesPage.elements
+      .downloadDocumenTitle()
+      .should("have.length", 6)
+      .and("have.attr", "href");
+    pricesPage.elements
+      .downloadDocumentIcon()
+      .should("have.length", 6)
+      .and("have.attr", "href");
   });
 });

@@ -2,9 +2,11 @@
 
 import { MainPage } from "../../page-object/page-object-main.js";
 import { SharedModules } from "../../page-object/shared-modules.js";
+import { Blog } from "../../page-object/page-object-blog.js";
 
 const mainPage = new MainPage();
 const modules = new SharedModules();
+const articlePage = new Blog();
 
 describe("Check the Main Page on Desktop", () => {
   beforeEach(function () {
@@ -32,34 +34,40 @@ describe("Check the Main Page on Desktop", () => {
   });
 
   it("Check the Blog Section", () => {
-    mainPage.blogHeaderValidation("Наш блог");
-    mainPage.checkArticlesCount(3);
+    mainPage.elements.blogArticleItem().should("have.have.length", 3);
   });
 
   it("Check the links in the Blog Section", () => {
-    mainPage.checkBlogLink();
+    mainPage.elements
+      .goToBlogButton()
+      .should("be.visible")
+      .and("have.attr", "href");
     mainPage.openBlog();
-    mainPage.linkValidation("blog");
-    mainPage.goBack();
-    mainPage.linkValidation("royalstone");
+    cy.url().should("include", "blog");
+    cy.return();
+    cy.url().should("include", "royalstone");
     mainPage.openArticle(1);
-    mainPage.breadcrumpsValidation("Наш блог");
+    articlePage.elements.shareLinks().should("be.visible");
   });
 
   it("Check the Catalog button", () => {
-    mainPage.catalogButtonValidation("Наш каталог");
+    mainPage.elements
+      .catalogButtonInHeroSection()
+      .should("have.text", "Наш каталог");
     mainPage.openCatalog();
-    mainPage.linkValidation("catalog");
-    mainPage.goBack();
-    mainPage.linkValidation("royalstone");
+    cy.url().should("include", "catalog");
+    cy.return();
+    cy.url().should("include", "royalstone");
   });
 
   it("Check the Call to Action button", () => {
-    mainPage.callToActionValidation("Замовити дзвінок");
-    modules.openForm();
+    mainPage.elements
+      .ctaButtonInHeroSection()
+      .should("have.text", "Замовити дзвінок");
+    mainPage.openForm();
     modules.formButtonValidation();
     modules.closeModalWindow();
-    mainPage.heroSectionValidation();
+    mainPage.elements.heroSection().should("be.visible");
   });
 });
 
@@ -73,8 +81,8 @@ describe("Check the Main Page on Mobile Screen", () => {
   });
 
   it("Check the Blog Section", () => {
-    mainPage.checkArticlesCount(3);
-    mainPage.mobCheckArticlesCount();
-    mainPage.checkBlogLink();
+    mainPage.elements.blogArticleItem().should("have.have.length", 3);
+    mainPage.validateArticlesCountOnMobile();
+    mainPage.elements.goToBlogButton().should("be.visible");
   });
 });

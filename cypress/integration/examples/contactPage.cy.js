@@ -5,7 +5,7 @@ import { contacts } from "../../fixtures/contacts-data.js";
 
 const contPage = new ContactsPage();
 
-describe("Check content on the Contact Page", () => {
+describe("Check content on the Contact Page", function () {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
@@ -13,12 +13,15 @@ describe("Check content on the Contact Page", () => {
     });
   });
 
-  it.only("Check the Address", function () {
-    contPage.checkAddress("Коростишів");
+  it("Check the Address", function () {
+    contPage.elements
+      .companyAddress()
+      .should("include.text", contacts.city)
+      .and("have.attr", "href");
   });
 
   it("Check the Phone Numbers", function () {
-    contPage.checkPhoneNumbersCount(3);
+    contPage.elements.companyPhoneNumbers().should("have.length", 3);
     contPage.checkPhoneNumbersLinks();
     contPage.checkNumbers(0, contacts.managerPhoneNum);
     contPage.checkNumbers(1, contacts.mainPhoneNum);
@@ -30,19 +33,19 @@ describe("Check content on the Contact Page", () => {
   });
 
   it("Check the Schedule", function () {
-    contPage.checkSchedule("Графік роботи:");
+    contPage.elements.schedule().should("include.text", "Графік роботи:");
   });
 
   it("Check the Social Buttons", function () {
-    contPage.checkSocialsCount(4);
+    contPage.elements.socialButtons().should("have.length", 4);
     contPage.checkSocialsLinks();
   });
 
   it("Check the Map", function () {
-    contPage.checkGoogleMap();
+    contPage.elements.googleMap().should("be.visible");
   });
 
   it("Check the Contact Form", function () {
-    contPage.checkForm();
+    contPage.elements.contactForm().should("be.visible");
   });
 });

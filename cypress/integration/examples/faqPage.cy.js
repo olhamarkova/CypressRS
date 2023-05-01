@@ -4,7 +4,7 @@ import { FAQPage } from "../../page-object/page-object-faq.js";
 
 const FAQ = new FAQPage();
 
-describe("Check the FAQ page", () => {
+describe("Check the FAQ page", function () {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
@@ -12,18 +12,18 @@ describe("Check the FAQ page", () => {
     });
   });
 
-  it("Check the Header", () => {
-    FAQ.headerValidation("Питання та відповіді");
+  it("Check the Header", function () {
+    FAQ.elements.mainHeader().should("have.text", "Питання та відповіді");
   });
 
-  it("Check the Sections", () => {
-    FAQ.checkQuestionsCount(17);
-    FAQ.hiddenSectionsValidation();
+  it("Check the Sections", function () {
+    FAQ.elements.questionSection().should("have.length", 17);
+    FAQ.validateHiddenSections();
   });
 
-  it("Check the First Section", () => {
-    FAQ.firstSectionValidation(0, true);
+  it("Check the First Section", function () {
+    FAQ.openFirstAnswer(0, true);
     FAQ.closeSection(0);
-    FAQ.firstSectionValidation(0, false);
+    FAQ.openFirstAnswer(0, false);
   });
 });
