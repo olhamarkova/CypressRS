@@ -1,12 +1,6 @@
 /// <reference types="cypress" />
 
-import { siteURLs } from "../fixtures/page-data.js";
-
 export class FAQPage {
-  navigate() {
-    cy.visit(siteURLs.faq);
-  }
-
   closeSection(index) {
     cy.get(".spoller-item__button-icon").eq(index).click();
   }

@@ -1,10 +1,6 @@
 /// <reference types="cypress" />
 
 export class SharedModules {
-  goBack() {
-    cy.go("back");
-  }
-
   // CTA
 
   scroll() {
@@ -61,7 +57,7 @@ export class SharedModules {
   }
 
   openForm() {
-    cy.contains("Замовити дзвінок").click({ force: true });
+    cy.contains("Залишити заявку").click({ force: true });
   }
 
   closeModalWindow() {

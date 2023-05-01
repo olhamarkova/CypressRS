@@ -11,7 +11,19 @@
 //
 // -- This is a parent command --
 // Cypress.Commands.add('login', (email, password) => { ... })
-//
+
+Cypress.Commands.add("openPage", (url) => {
+  cy.visit(url);
+});
+
+Cypress.Commands.add("return", () => {
+  cy.go("back");
+});
+
+Cypress.Commands.add("goToMainPage", () => {
+  cy.get(".header__logo-img").click();
+});
+
 //
 // -- This is a child command --
 // Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })

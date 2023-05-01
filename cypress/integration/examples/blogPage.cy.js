@@ -5,29 +5,41 @@ import { Blog } from "../../page-object/page-object-blog.js";
 const blogPage = new Blog();
 
 describe("Check the Blog Page", () => {
-  beforeEach(() => {
-    blogPage.navigate();
+  beforeEach(function () {
+    cy.fixture("page-data").then(function (data) {
+      this.data = data;
+      cy.openPage(this.data.blog);
+    });
   });
 
-  it.only("Check the Actual Articles Section", () => {
-    blogPage.checkBigBlogItem(1);
-    blogPage.checkSmallBlogItem(2);
+  it("Check the Actual Articles Section", function () {
+    blogPage.elements
+      .actualNowBigPreview()
+      .should("be.visible")
+      .and("have.length", 1);
+    blogPage.elements
+      .actualNowSmallPreview()
+      .should("be.visible")
+      .and("have.length", 2);
   });
 
-  it("Check the Count of Articles on the Main Blog Page", () => {
-    blogPage.checkArticlesCount(6);
-    blogPage.openMore();
-    blogPage.checkArticlesCount(12);
+  it("Check the Load More Button", function () {
+    blogPage.elements.newArticleTitle().should("have.length", 6);
+    blogPage.loadMoreArticles();
+    blogPage.elements.newArticleTitle().should("have.length", 12);
   });
 
-  it("Check the Article Page", () => {
+  it("Check the Article Page", function () {
     blogPage.openArticle(1);
-    blogPage.checkArticleContent();
-    blogPage.wait();
-    blogPage.checkShareLinks(7);
-    blogPage.checkPostNavPanel();
-    blogPage.checkNavPanelLinks("prev");
-    blogPage.checkNavPanelLinks("next");
-    blogPage.checkPopularSection(3);
+    cy.wait(3000);
+    blogPage.elements.articleContent().should("be.visible");
+    blogPage.elements.shareLinks().should("have.length", 7);
+    blogPage.elements.postNavigationPanel().should("be.visible");
+    blogPage.elements.previousPostLink().should("have.attr", "href");
+    blogPage.elements.nextPostLink().should("have.attr", "href");
+    blogPage.elements
+      .popularArticlesSection()
+      .should("be.visible")
+      .and("have.length", 3);
   });
 });

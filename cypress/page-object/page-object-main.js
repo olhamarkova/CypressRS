@@ -1,12 +1,6 @@
 /// <reference types="cypress" />
 
-import { siteURLs } from "../fixtures/page-data.js";
-
 export class MainPage {
-  navigate() {
-    cy.visit(siteURLs.url);
-  }
-
   linkValidation(text) {
     cy.url().should("include", text);
   }
@@ -20,7 +14,7 @@ export class MainPage {
   }
 
   openCatalog() {
-    cy.get(".btn-border").click({ force: true });
+    cy.get(".hero-section__desc .btn-border").click({ force: true });
   }
 
   openForm() {
@@ -54,7 +48,7 @@ export class MainPage {
   }
 
   catalogButtonValidation(text) {
-    cy.get(".btn-border").should("have.text", text);
+    cy.get(".hero-section__desc .btn-border").should("have.text", text);
   }
 
   callToActionValidation(text) {

@@ -1,12 +1,6 @@
 /// <reference types="cypress" />
 
-import { siteURLs } from "../fixtures/page-data.js";
-
 export class Prices {
-  navigate() {
-    cy.visit(siteURLs.prices);
-  }
-
   tableCheck() {
     cy.get(".price-table").should("be.visible");
   }

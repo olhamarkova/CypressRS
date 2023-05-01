@@ -1,12 +1,6 @@
 /// <reference types="cypress" />
 
-import { siteURLs } from "../fixtures/page-data.js";
-
 export class ContactsPage {
-  navigate() {
-    cy.visit(siteURLs.contacts);
-  }
-
   checkAddress(text) {
     cy.get(".col-xl-4:nth-child(1) .address__link")
       .should("include.text", text)

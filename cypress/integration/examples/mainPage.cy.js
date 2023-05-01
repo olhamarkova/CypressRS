@@ -2,16 +2,17 @@
 
 import { MainPage } from "../../page-object/page-object-main.js";
 import { SharedModules } from "../../page-object/shared-modules.js";
-import { Dimensions } from "../../page-object/dimensions.js";
 
 const mainPage = new MainPage();
-const viewport = new Dimensions();
 const modules = new SharedModules();
 
 describe("Check the Main Page on Desktop", () => {
-  beforeEach(() => {
-    mainPage.navigate();
-    viewport.desktopView();
+  beforeEach(function () {
+    cy.fixture("page-data").then(function (data) {
+      this.data = data;
+      cy.openPage(this.data.mainPage);
+      cy.viewport(1920, 1080);
+    });
   });
 
   it("Check the messenger's menu", () => {
@@ -63,9 +64,12 @@ describe("Check the Main Page on Desktop", () => {
 });
 
 describe("Check the Main Page on Mobile Screen", () => {
-  beforeEach(() => {
-    mainPage.navigate();
-    viewport.mobileView();
+  beforeEach(function () {
+    cy.fixture("page-data").then(function (data) {
+      this.data = data;
+      cy.openPage(this.data.mainPage);
+      cy.viewport(360, 800);
+    });
   });
 
   it("Check the Blog Section", () => {

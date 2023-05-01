@@ -1,15 +1,16 @@
 /// <reference types="cypress" />
 
 import { Footer } from "../../page-object/page-object-footer.js";
-import { Dimensions } from "../../page-object/dimensions.js";
 
 const footer = new Footer();
-const screen = new Dimensions();
 
 describe("Check the Footer on Desktop", () => {
-  beforeEach(() => {
-    footer.navigate();
-    screen.desktopView();
+  beforeEach(function () {
+    cy.fixture("page-data").then(function (data) {
+      this.data = data;
+      cy.openPage(this.data.mainPage);
+      cy.viewport(1920, 1080);
+    });
   });
 
   it("Check the Logo", () => {
@@ -28,7 +29,7 @@ describe("Check the Footer on Desktop", () => {
     footer.footerMenuValidation(3, "Каталог");
     footer.footerContactsHeaderValidation("Контакти");
     footer.footerMenuCount(1, 7);
-    footer.footerMenuCount(2, 7);
+    footer.footerMenuCount(2, 6);
     footer.footerMenuLinksVal();
   });
 

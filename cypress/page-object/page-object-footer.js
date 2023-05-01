@@ -1,13 +1,8 @@
 /// <reference types="cypress" />
 
 import { contacts } from "../fixtures/contacts-data.js";
-import { siteURLs } from "../fixtures/page-data.js";
 
 export class Footer {
-  navigate() {
-    cy.visit(siteURLs.url);
-  }
-
   scrollToFooter() {
     cy.get(".footer-top").scrollIntoView();
   }

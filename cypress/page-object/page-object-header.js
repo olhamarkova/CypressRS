@@ -1,17 +1,6 @@
 /// <reference types="cypress" />
 
-import { contacts } from "../fixtures/contacts-data.js";
-import { siteURLs } from "../fixtures/page-data.js";
-
 export class Header {
-  navigate() {
-    cy.visit(siteURLs.url);
-  }
-
-  reload() {
-    cy.get(".header__logo-img").click();
-  }
-
   //validation
 
   checkMainLogo() {
@@ -28,16 +17,16 @@ export class Header {
     });
   }
 
-  phoneNumValidation() {
+  phoneNumValidation(text) {
     cy.get(".header-top__right-contacts")
       .find(".phones-item__link")
-      .should("include.text", contacts.mainPhoneNum, contacts.managerPhoneNum);
+      .should("include.text", text);
   }
 
-  emailValidation() {
+  emailValidation(email) {
     cy.get(".header-top__right-contacts")
       .find(".emails-item__link")
-      .should("include.text", contacts.email);
+      .should("include.text", email);
   }
 
   scheduleValidation(text) {

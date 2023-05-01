@@ -1,63 +1,24 @@
 /// <reference types="cypress" />
 
-import { siteURLs } from "../fixtures/page-data.js";
-
 export class Blog {
-  navigate() {
-    cy.visit(siteURLs.blog);
-  }
+  elements = {
+    newArticleTitle: () => cy.get(".blog-item__title"),
+    loadMoreButton: () => cy.get(".loadmore-btn"),
+    actualNowBigPreview: () => cy.get(".blog-top-item--big"),
+    actualNowSmallPreview: () => cy.get(".blog-top-item--small"),
+    articleContent: () => cy.get(".content"),
+    shareLinks: () => cy.get(".share-item__link"),
+    postNavigationPanel: () => cy.get(".post-nav"),
+    previousPostLink: () => cy.get(".post-nav__prev a"),
+    nextPostLink: () => cy.get(".post-nav__next a"),
+    popularArticlesSection: () => cy.get(".blog-item__top"),
+  };
 
-  wait() {
-    cy.wait(3000);
+  loadMoreArticles() {
+    this.elements.loadMoreButton().click();
   }
 
   openArticle(index) {
-    cy.get(".blog-list-item-col").eq(index).click();
-  }
-
-  openMore() {
-    cy.get(".loadmore-btn").click();
-  }
-
-  goBack() {
-    cy.go("back");
-  }
-
-  //validation
-
-  checkBigBlogItem(count) {
-    cy.get(".blog-top-item--big")
-      .should("be.visible")
-      .and("have.length", count);
-  }
-
-  checkSmallBlogItem(count) {
-    cy.get(".blog-top-item--small")
-      .should("be.visible")
-      .and("have.length", count);
-  }
-
-  checkArticlesCount(count) {
-    cy.get(".blog-list-item-col").should("have.length", count);
-  }
-
-  checkArticleContent() {
-    cy.get(".content").should("be.visible");
-  }
-
-  checkShareLinks(count) {
-    cy.get(".share-item__link").should("have.length", count);
-  }
-
-  checkPostNavPanel() {
-    cy.get(".post-nav").should("be.visible");
-  }
-
-  checkNavPanelLinks(char) {
-    cy.get(`.post-nav__${char} a`).should("have.attr", "href");
-  }
-
-  checkPopularSection(index) {
-    cy.get(".blog-item__top").should("be.visible").and("have.length", index);
+    this.elements.newArticleTitle().eq(index).click();
   }
 }

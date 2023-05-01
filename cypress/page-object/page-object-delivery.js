@@ -1,12 +1,6 @@
 /// <reference types="cypress" />
 
-import { siteURLs } from "../fixtures/page-data.js";
-
 export class Delivery {
-  navigate() {
-    cy.visit(siteURLs.delivery);
-  }
-
   checkDeliveryHeader(text) {
     cy.get(".delivery h2.delivery__title").should("have.text", text);
   }

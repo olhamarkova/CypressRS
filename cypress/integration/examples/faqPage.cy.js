@@ -5,8 +5,11 @@ import { FAQPage } from "../../page-object/page-object-faq.js";
 const FAQ = new FAQPage();
 
 describe("Check the FAQ page", () => {
-  beforeEach(() => {
-    FAQ.navigate();
+  beforeEach(function () {
+    cy.fixture("page-data").then(function (data) {
+      this.data = data;
+      cy.openPage(this.data.faq);
+    });
   });
 
   it("Check the Header", () => {
