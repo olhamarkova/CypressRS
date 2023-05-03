@@ -2,6 +2,7 @@
 
 import { ContactsPage } from "../../page-object/page-object-contacts.js";
 import { contacts } from "../../fixtures/contacts-data.js";
+import { text } from "../../fixtures/texts.js";
 
 const contPage = new ContactsPage();
 
@@ -33,7 +34,7 @@ describe("Check content on the Contact Page", function () {
   });
 
   it("Check the Schedule", function () {
-    contPage.elements.schedule().should("include.text", "Графік роботи:");
+    contPage.elements.schedule().should("include.text", text.schedule);
   });
 
   it("Check the Social Buttons", function () {

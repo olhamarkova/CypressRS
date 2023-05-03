@@ -2,6 +2,7 @@
 
 import { Header } from "../../page-object/page-object-header.js";
 import { contacts } from "../../fixtures/contacts-data.js";
+import { text } from "../../fixtures/texts.js";
 
 const header = new Header();
 
@@ -14,17 +15,24 @@ describe("Check the Header on Desktop", function () {
     });
   });
 
-  it("Check the logo", function () {
-    header.checkMainLogo();
+  it("Check the Logo", function () {
+    header.elements.mainLogo().should("be.visible");
     cy.goToMainPage();
-    header.linkValidation("royalstone");
+    cy.url().should("include", text.siteNameInUrl);
   });
 
   it("Check the Contacts Section", function () {
-    header.contactSectionValidation();
-    header.phoneNumValidation(contacts.managerPhoneNum, contacts.mainPhoneNum);
-    header.emailValidation(contacts.email);
-    header.scheduleValidation("Графік роботи:");
+    header.validatePhoneNumbersLinks();
+    header.elements
+      .phoneNumbers()
+      .eq(0)
+      .should("have.text", contacts.managerPhoneNum);
+    header.elements
+      .phoneNumbers()
+      .eq(1)
+      .should("have.text", contacts.mainPhoneNum);
+    header.elements.email().should("have.text", contacts.email);
+    header.elements.schedule().should("include.text", text.schedule);
   });
 });
 
@@ -38,15 +46,10 @@ describe("Check the Header on Mobile Screen", function () {
   });
 
   it("Check the Logo", function () {
-    header.checkMainLogo();
-  });
-
-  it("Check the Contacts Section", function () {
-    header.contactSectionValidation();
-    header.phoneNumValidation(contacts.managerPhoneNum, contacts.mainPhoneNum);
+    header.elements.mainLogo().should("be.visible");
   });
 
   it("Check the Mobile Menu", function () {
-    header.mobNavigation();
+    header.elements.mobileMenu().should("be.visible");
   });
 });

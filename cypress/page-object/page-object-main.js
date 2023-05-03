@@ -8,6 +8,8 @@ export class MainPage {
     heroSection: () => cy.get(".hero-bg-wrapper"),
     catalogButtonInHeroSection: () => cy.get(".hero-section__desc .btn-border"),
     ctaButtonInHeroSection: () => cy.get(".hero-section__desc .btn-accent"),
+    workStepsSection: () => cy.get(".work-steps-section"),
+    workStepsItem: () => cy.get(".work-steps-item__icon"),
   };
 
   openBlog() {
@@ -18,11 +20,11 @@ export class MainPage {
     this.elements.blogArticleItem().eq(index).click();
   }
 
-  openCatalog() {
+  openCatalogInHeroSection() {
     this.elements.catalogButtonInHeroSection().click({ force: true });
   }
 
-  openForm() {
+  openFormInHeroSection() {
     this.elements.ctaButtonInHeroSection().click({ force: true });
   }
 

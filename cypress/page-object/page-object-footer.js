@@ -3,65 +3,59 @@
 import { contacts } from "../fixtures/contacts-data.js";
 
 export class Footer {
-  scrollToFooter() {
-    cy.get(".footer-top").scrollIntoView();
+  elements = {
+    footerSection: () => cy.get("#footer"),
+    logoInFooter: () => cy.get(".footer__logo-img"),
+    socialLinks: () => cy.get(".footer-top__col-logo a.socials-link"),
+    navigationMenu: () => cy.get("#nav_menu-2"),
+    navMenuTitle: () => cy.get("#nav_menu-2 .footer-col-title"),
+    navMenuItems: () => cy.get("#menu-menyu-v-pidvali-1 .menu-item"),
+    catalogMenu: () => cy.get("#nav_menu-3"),
+    catalogMenuTitle: () => cy.get("#nav_menu-3 .footer-col-title"),
+    catalogMenuItem: () => cy.get("#menu-menyu-v-pidvali-2 .menu-item"),
+    contactsMenu: () => cy.get(".footer-top__col-contacts"),
+    contactsMenuTitle: () =>
+      cy.get(".footer-top__col-contacts .footer-col-title"),
+    emailInFooter: () => cy.get(".footer-top__col-contacts .emails-item__link"),
+    adressInFooter: () => cy.get(".footer-top__col-contacts .address__link"),
+    privacyPolicyLink: () => cy.get("a.privacy-policy-link"),
+  };
+
+  validateFooterMenuLinks() {
+    this.elements.navMenuItems().each(($el, index, $list) => {
+      cy.wrap($el).find("a").should("have.attr", "href");
+    });
+    this.elements.catalogMenuItem().each(($el, index, $list) => {
+      cy.wrap($el).find("a").should("have.attr", "href");
+    });
   }
 
-  checkLogo() {
-    cy.get(".footer__logo-img").should("be.visible");
-  }
-
-  checkSocialsCount(count) {
-    cy.get(".footer-top__col-logo")
-      .find("a.socials-link")
-      .should("have.length", count);
-  }
-
-  footerMenuValidation(index, text) {
-    cy.get(`#nav_menu-${index} h4`).should("include.text", text);
-  }
-
-  footerContactsHeaderValidation(text) {
-    cy.get(".footer-top__col-contacts h4").should("have.text", text);
-  }
-
-  footerMenuCount(index, count) {
-    cy.get(`#menu-menyu-v-pidvali-${index}`)
-      .find(".menu-item")
-      .should("have.length", count);
-  }
-
-  footerMenuLinksVal() {
-    cy.get(".menu-menyu-v-pidvali-1-container")
-      .find(".menu-item")
-      .each(($el, index, $list) => {
-        cy.wrap($el).find("a").should("have.attr", "href");
-      });
-  }
-
-  contactsLinksCheck() {
-    cy.get(".footer-top__col-contacts :nth-child(3)")
+  validateContactsLinks() {
+    this.elements
+      .contactsMenu()
       .find(".phones-item")
       .each(($el, index, $list) => {
         cy.wrap($el).find("a").should("have.attr", "href");
       });
   }
 
-  checkEmail() {
-    cy.get(".footer-top__col-contacts")
-      .find(".emails-item__link")
+  validateEmailInFooter() {
+    this.elements
+      .emailInFooter()
       .should("have.text", contacts.email)
       .and("have.attr", "href");
   }
 
-  checkAddress(text) {
-    cy.get(".footer-top__col-contacts .address__link")
-      .should("include.text", text)
+  validateAddressInFooter() {
+    this.elements
+      .adressInFooter()
+      .should("include.text", contacts.city)
       .and("have.attr", "href");
   }
 
-  checkPrivacyPolicy(text) {
-    cy.get("a.privacy-policy-link")
+  validatePrivacyPolicyLink(text) {
+    this.elements
+      .privacyPolicyLink()
       .should("have.text", text)
       .and("have.attr", "href");
   }

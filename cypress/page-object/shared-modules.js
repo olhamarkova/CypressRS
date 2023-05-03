@@ -1,84 +1,54 @@
 /// <reference types="cypress" />
 
+// Add Contact Form
 export class SharedModules {
-  // CTA
+  elements = {
+    mainCTASection: () => cy.get(".cta-section__content"),
+    mainCTABorderButton: () => cy.get(".cta-section__content .btn-border"),
+    mainCTASectionContent: () => cy.get(".cta-section__content"),
+    mainCTAHeader: () => cy.get(".cta-section__content h3"),
+    mainCTAAccentButton: () => cy.get(".cta-section__content .btn-accent"),
+    ourAdvantagesSection: () => cy.get("#advantages"),
+    ourAdvantagesItems: () => cy.get(".advantages-item"),
+    reviewsSlider: () => cy.get("#reviews-slider"),
+    nextReviewButton: () => cy.get(".slider-button--next"),
+    previousReviewButton: () => cy.get(".slider-button--prev"),
+    reviewItem: () => cy.get(".reviews-item__inner"),
+    reviewAuthor: () => cy.get(".reviews-item__name"),
+    callBackFormModal: () => cy.get("#wpforms-submit-135"),
+    submitModalButton: () => cy.get("button[name='wpforms[submit]']"),
+    closeModalButton: () => cy.get(".is-close-btn"),
+    messengersMainButton: () => cy.get(".messengers-btn-wrapper"),
+    messengersPopup: () => cy.get(".messengers-popup"),
+    messengerItem: () => cy.get(".messengers-popup__item"),
+  };
 
-  scroll() {
-    cy.get(".cta-section__content").scrollIntoView();
+  validateCTASection(text, cta) {
+    this.elements.mainCTASection().should("be.visible");
+    this.elements.mainCTABorderButton().should("have.text", text);
+    this.elements.mainCTAAccentButton().should("have.text", cta);
   }
 
-  partnerButton() {
-    cy.get(".btn-border").click();
+  validateOurAdvantagesSection() {
+    this.elements.ourAdvantagesSection().should("be.visible");
+    this.elements.ourAdvantagesItems().should("have.length", 4);
   }
 
-  linkValidation(text) {
-    cy.url().should("include", text);
+  goToNextReview() {
+    this.elements.nextReviewButton().click({ force: true });
   }
 
-  checkCTASectionContent() {
-    cy.get(".cta-section__content").should("be.visible");
-  }
-
-  checkCTAHeader(text) {
-    cy.get(".cta-section__content h3").should("have.text", text);
-  }
-
-  checkCTAButton() {
-    cy.get(".cta-section__content .btn-accent").should("be.visible");
-  }
-
-  // Our Advantages
-
-  ourAdvantagesCheck() {
-    cy.get("#advantages").should("be.visible");
-  }
-
-  ourAdvantagesItems(count) {
-    cy.get(".advantages-item").should("have.length", count);
-  }
-
-  // Reviews
-
-  reviewTextValidation(index, text) {
-    cy.get("#reviews-slider")
-      .find(".reviews-item__inner")
-      .eq(index)
-      .should("include.text", text);
-  }
-
-  nextReview() {
-    cy.get(".slider-button--next").click({ force: true });
-  }
-
-  // Call Back Form
-
-  formButtonValidation() {
-    cy.get("#wpforms-submit-135").should("be.visible");
-  }
-
-  openForm() {
-    cy.contains("Залишити заявку").click({ force: true });
+  goToPreviousReview() {
+    this.elements.previousReviewButton().click({ force: true });
   }
 
   closeModalWindow() {
-    cy.get(".is-close-btn").click();
+    this.elements.closeModalButton().click();
   }
 
-  // Contact Form
-
-  // Messengers
-
-  openMessengers() {
-    cy.get(".messengers-btn-wrapper").click();
-  }
-
-  mesButtonValidation() {
-    cy.get(".messengers-btn-wrapper").should("be.visible");
-  }
-
-  checkMessengersCount(count) {
-    cy.get(".messengers-popup")
-      .find(".messengers-popup__item")
-      .should("have.length", count);
+  validateMessengers() {
+    this.elements.messengersMainButton().click();
+    this.elements.messengersPopup().should("be.visible");
+    this.elements.messengerItem().should("have.length", 6);
   }
 }

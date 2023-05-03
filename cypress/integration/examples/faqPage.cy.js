@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import { FAQPage } from "../../page-object/page-object-faq.js";
+import { text } from "../../fixtures/texts.js";
 
 const FAQ = new FAQPage();
 
@@ -13,7 +14,7 @@ describe("Check the FAQ page", function () {
   });
 
   it("Check the Header", function () {
-    FAQ.elements.mainHeader().should("have.text", "Питання та відповіді");
+    FAQ.elements.mainHeader().should("have.text", text.FAQTitle);
   });
 
   it("Check the Sections", function () {

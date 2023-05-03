@@ -3,6 +3,7 @@
 import { MainPage } from "../../page-object/page-object-main.js";
 import { SharedModules } from "../../page-object/shared-modules.js";
 import { Blog } from "../../page-object/page-object-blog.js";
+import { text } from "../../fixtures/texts.js";
 
 const mainPage = new MainPage();
 const modules = new SharedModules();
@@ -17,20 +18,54 @@ describe("Check the Main Page on Desktop", () => {
     });
   });
 
+  it("Check the Catalog button in Hero Section", () => {
+    mainPage.elements
+      .catalogButtonInHeroSection()
+      .should("have.text", text.catalogButton);
+    mainPage.openCatalogInHeroSection();
+    cy.url().should("include", text.catalogPageUrl);
+    cy.return();
+    cy.url().should("include", text.siteNameInUrl);
+  });
+
+  it("Check the Call to Action button in Hero Section", () => {
+    mainPage.elements
+      .ctaButtonInHeroSection()
+      .should("have.text", text.openFormButton);
+    mainPage.openFormInHeroSection();
+    modules.elements.submitModalButton().should("be.visible");
+    modules.closeModalWindow();
+    mainPage.elements.heroSection().should("be.visible");
+  });
+
   it("Check the messenger's menu", () => {
-    modules.mesButtonValidation();
-    modules.openMessengers();
-    modules.checkMessengersCount(6);
+    modules.validateMessengers();
   });
 
   it("Check the Our Adventages Section", () => {
-    modules.ourAdvantagesCheck();
-    modules.ourAdvantagesItems(4);
+    modules.validateOurAdvantagesSection();
+  });
+
+  it("Check the CTA Section", () => {
+    modules.validateCTASection(text.catalogTitleButton, text.mainPageCtaButton);
+    modules.elements.mainCTABorderButton().click({ force: true });
+    cy.url().should("include", text.catalogPageUrl);
+    cy.return();
+    modules.elements.mainCTAAccentButton().click({ force: true });
+    modules.elements.callBackFormModal().should("be.visible");
+  });
+
+  it("Check the Work Steps section", () => {
+    mainPage.elements.workStepsSection().should("be.visible");
+    mainPage.elements.workStepsItem().should("have.length", 8);
   });
 
   it("Check the review block", () => {
-    modules.nextReview();
-    modules.reviewTextValidation(2, "Олександра");
+    modules.elements.reviewsSlider().should("be.visible");
+    modules.elements
+      .reviewAuthor()
+      .eq(2)
+      .should("have.text", text.secondCustomerName);
   });
 
   it("Check the Blog Section", () => {
@@ -45,29 +80,9 @@ describe("Check the Main Page on Desktop", () => {
     mainPage.openBlog();
     cy.url().should("include", "blog");
     cy.return();
-    cy.url().should("include", "royalstone");
+    cy.url().should("include", text.siteNameInUrl);
     mainPage.openArticle(1);
     articlePage.elements.shareLinks().should("be.visible");
-  });
-
-  it("Check the Catalog button", () => {
-    mainPage.elements
-      .catalogButtonInHeroSection()
-      .should("have.text", "Наш каталог");
-    mainPage.openCatalog();
-    cy.url().should("include", "catalog");
-    cy.return();
-    cy.url().should("include", "royalstone");
-  });
-
-  it("Check the Call to Action button", () => {
-    mainPage.elements
-      .ctaButtonInHeroSection()
-      .should("have.text", "Замовити дзвінок");
-    mainPage.openForm();
-    modules.formButtonValidation();
-    modules.closeModalWindow();
-    mainPage.elements.heroSection().should("be.visible");
   });
 });
 

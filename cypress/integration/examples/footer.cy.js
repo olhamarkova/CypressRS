@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import { Footer } from "../../page-object/page-object-footer.js";
+import { text } from "../../fixtures/texts.js";
 
 const footer = new Footer();
 
@@ -13,33 +14,38 @@ describe("Check the Footer on Desktop", () => {
     });
   });
 
-  it("Check the Logo", () => {
-    footer.scrollToFooter();
-    footer.checkLogo();
+  it("Check the Logo", function () {
+    footer.elements.logoInFooter().click();
+    cy.url().should("include", text.siteNameInUrl);
   });
 
-  it("Check the Social Links", () => {
-    footer.scrollToFooter();
-    footer.checkSocialsCount(4);
+  it("Check the Social Links", function () {
+    footer.elements
+      .socialLinks()
+      .should("have.length", 4)
+      .and("have.attr", "href");
   });
 
-  it("Check the Menu", () => {
-    footer.scrollToFooter();
-    footer.footerMenuValidation(2, "Навігація");
-    footer.footerMenuValidation(3, "Каталог");
-    footer.footerContactsHeaderValidation("Контакти");
-    footer.footerMenuCount(1, 7);
-    footer.footerMenuCount(2, 6);
-    footer.footerMenuLinksVal();
+  it("Check the Menu", function () {
+    footer.elements.navMenuTitle().should("have.text", text.navMenuInFooter);
+    footer.elements
+      .catalogMenuTitle()
+      .should("have.text", text.catMenuInFooter);
+    footer.elements
+      .contactsMenuTitle()
+      .should("have.text", text.contactMenuInFooter);
+    footer.elements.catalogMenuItem().should("have.length", 7);
+    footer.elements.navMenuItems().should("have.length", 7);
+    footer.validateFooterMenuLinks();
   });
 
-  it("Check the Contacts Section", () => {
-    footer.contactsLinksCheck();
-    footer.checkEmail();
-    footer.checkAddress("Коростишів");
+  it("Check the Contacts Section", function () {
+    footer.validateContactsLinks();
+    footer.validateEmailInFooter();
+    footer.validateAddressInFooter();
   });
 
-  it("Check the Privacy Policy link", () => {
-    footer.checkPrivacyPolicy("Політика конфіденційності");
+  it("Check the Privacy Policy link", function () {
+    footer.validatePrivacyPolicyLink(text.privacyPolicy);
   });
 });

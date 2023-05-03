@@ -12,11 +12,11 @@ describe("Info Pages Check", () => {
   });
 
   it("Check content on Info Pages", function () {
-    let url;
     this.data.links.forEach(function (element) {
-      return (url = element);
+      let url;
+      url = element;
+      cy.openPage(url);
+      productPage.checkContentOnProductPage();
     });
-    cy.openPage(url);
-    productPage.checkContentOnProductPage();
   });
 });
