@@ -41,4 +41,12 @@ export class MainPage {
       }
     });
   }
+
+  openCatalogOnProductItem() {
+    this.elements.catalogItemTitle().eq(1).click({ force: true });
+  }
+
+  openCatalogSectionButton() {
+    this.elements.goToBlogButton().eq(0).click({ force: true });
+  }
 }

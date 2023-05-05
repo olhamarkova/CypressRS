@@ -1,10 +1,12 @@
 /// <reference types="cypress" />
 
 import { ContactsPage } from "../../page-object/page-object-contacts.js";
+import { SharedModules } from "../../page-object/shared-modules.js";
 import { contacts } from "../../fixtures/contacts-data.js";
 import { text } from "../../fixtures/texts.js";
 
 const contPage = new ContactsPage();
+const modules = new SharedModules();
 
 describe("Check content on the Contact Page", function () {
   beforeEach(function () {
@@ -48,5 +50,6 @@ describe("Check content on the Contact Page", function () {
 
   it("Check the Contact Form", function () {
     contPage.elements.contactForm().should("be.visible");
+    modules.validateContactForm();
   });
 });

@@ -17,4 +17,6 @@ export const text = {
   deliveryLinkAnchor: "тарифами",
   FAQTitle: "Питання та відповіді",
   productCategoryUrl: "prod-cat",
+  phoneNumberMask: "+__ (___) ___-__-__",
+  emailMask: "_@_._",
 };

@@ -43,8 +43,11 @@ describe("Check the Main Page on Desktop", () => {
       .catalogCardItem()
       .should("be.visible")
       .and("have.length", 4);
-    mainPage.elements.catalogItemTitle().eq(1).click({ force: true });
+    mainPage.openCatalogOnProductItem();
     cy.url().should("include", text.productCategoryUrl);
+    cy.return();
+    mainPage.openCatalogSectionButton();
+    cy.url().should("include", text.catalogPageUrl);
   });
 
   it("Check the Products Slider", () => {
@@ -69,7 +72,7 @@ describe("Check the Main Page on Desktop", () => {
     cy.url().should("include", text.catalogPageUrl);
     cy.return();
     modules.elements.mainCTAAccentButton().click({ force: true });
-    modules.elements.callBackFormModal().should("be.visible");
+    modules.validateModalForm();
   });
 
   it("Check the Work Steps section", () => {
