@@ -49,8 +49,10 @@ describe("Check the Main Page on Desktop", () => {
 
   it("Check the Products Slider", () => {
     mainPage.elements.productSliderSection().should("be.visible");
-    mainPage.elements.productCardButton().eq(2).click({ force: true });
-    modules.elements.callBackFormModal().should("be.visible");
+    mainPage.elements.productCardButton().each((el) => {
+      cy.wrap(el).click({ force: true });
+      modules.elements.callBackFormModal().should("be.visible");
+    });
   });
 
   it("Check the messenger's menu", () => {
