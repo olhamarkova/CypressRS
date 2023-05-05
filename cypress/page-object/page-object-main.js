@@ -10,10 +10,16 @@ export class MainPage {
     ctaButtonInHeroSection: () => cy.get(".hero-section__desc .btn-accent"),
     workStepsSection: () => cy.get(".work-steps-section"),
     workStepsItem: () => cy.get(".work-steps-item__icon"),
+    catalogCardItem: () => cy.get(".catalog-cat-nav-item__img"),
+    catalogItemTitle: () => cy.get(".img-box__title"),
+    productSliderSection: () => cy.get(".prod-slider-section"),
+    productCardItem: () => cy.get(".catalog-item"),
+    productCardItem: () => cy.get(".catalog-item__title"),
+    productCardButton: () => cy.get(".catalog-item__btn"),
   };
 
   openBlog() {
-    this.elements.goToBlogButton().click({ force: true });
+    this.elements.goToBlogButton().eq(1).click({ force: true });
   }
 
   openArticle(index) {

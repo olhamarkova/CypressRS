@@ -38,6 +38,21 @@ describe("Check the Main Page on Desktop", () => {
     mainPage.elements.heroSection().should("be.visible");
   });
 
+  it("Check the Catalog Section", () => {
+    mainPage.elements
+      .catalogCardItem()
+      .should("be.visible")
+      .and("have.length", 4);
+    mainPage.elements.catalogItemTitle().eq(1).click({ force: true });
+    cy.url().should("include", text.productCategoryUrl);
+  });
+
+  it("Check the Products Slider", () => {
+    mainPage.elements.productSliderSection().should("be.visible");
+    mainPage.elements.productCardButton().eq(2).click({ force: true });
+    modules.elements.callBackFormModal().should("be.visible");
+  });
+
   it("Check the messenger's menu", () => {
     modules.validateMessengers();
   });

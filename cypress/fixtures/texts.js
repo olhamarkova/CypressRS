@@ -16,4 +16,5 @@ export const text = {
   paymentTitle: "Способи оплати:",
   deliveryLinkAnchor: "тарифами",
   FAQTitle: "Питання та відповіді",
+  productCategoryUrl: "prod-cat",
 };
