@@ -2,7 +2,6 @@
 
 import { text } from "../fixtures/texts";
 
-// Add Contact Form
 export class SharedModules {
   elements = {
     mainCTASection: () => cy.get(".cta-section__content"),
