@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { text } from "../fixtures/texts";
+import { text } from "../fixtures/textsUA";
 
 export class SharedModules {
   elements = {

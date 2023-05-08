@@ -3,7 +3,7 @@
 import { ContactsPage } from "../../page-object/page-object-contacts.js";
 import { SharedModules } from "../../page-object/shared-modules.js";
 import { contacts } from "../../fixtures/contacts-data.js";
-import { text } from "../../fixtures/texts.js";
+import { text } from "../../fixtures/textsUA.js";
 
 const contPage = new ContactsPage();
 const modules = new SharedModules();
@@ -12,7 +12,7 @@ describe("Check content on the Contact Page", function () {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.contacts);
+      cy.openPage(Cypress.env("url") + this.data.contacts);
     });
   });
 

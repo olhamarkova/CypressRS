@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import { Delivery } from "../../page-object/page-object-delivery.js";
-import { text } from "../../fixtures/texts.js";
+import { text } from "../../fixtures/textsUA.js";
 
 const delivPage = new Delivery();
 
@@ -9,7 +9,7 @@ describe("Check the Delivery page", () => {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.delivery);
+      cy.openPage(Cypress.env("url") + this.data.delivery);
     });
   });
 

@@ -8,7 +8,7 @@ describe("Check the Prices Page on Desktop", () => {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.prices);
+      cy.openPage(Cypress.env("url") + this.data.prices);
       cy.viewport(1920, 1080);
     });
   });

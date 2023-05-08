@@ -8,7 +8,7 @@ describe("Check the Blog Page", () => {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.blog);
+      cy.openPage(Cypress.env("url") + this.data.blog);
     });
   });
 

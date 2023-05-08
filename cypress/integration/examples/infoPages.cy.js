@@ -15,7 +15,7 @@ describe("Info Pages Check", () => {
     this.data.links.forEach(function (element) {
       let url;
       url = element;
-      cy.openPage(url);
+      cy.openPage(Cypress.env("url") + url);
       productPage.checkContentOnProductPage();
     });
   });

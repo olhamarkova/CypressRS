@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import { FAQPage } from "../../page-object/page-object-faq.js";
-import { text } from "../../fixtures/texts.js";
+import { text } from "../../fixtures/textsUA.js";
 
 const FAQ = new FAQPage();
 
@@ -9,7 +9,7 @@ describe("Check the FAQ page", function () {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.faq);
+      cy.openPage(Cypress.env("url") + this.data.faq);
     });
   });
 

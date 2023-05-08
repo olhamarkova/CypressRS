@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 import { Footer } from "../../page-object/page-object-footer.js";
-import { text } from "../../fixtures/texts.js";
+import { text } from "../../fixtures/textsUA.js";
 
 const footer = new Footer();
 
@@ -9,7 +9,7 @@ describe("Check the Footer on Desktop", () => {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.mainPage);
+      cy.openPage(Cypress.env("url"));
       cy.viewport(1920, 1080);
     });
   });

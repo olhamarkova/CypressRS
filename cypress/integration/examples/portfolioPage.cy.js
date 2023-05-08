@@ -8,7 +8,7 @@ describe("Check the Portfolio Page on Desktop", () => {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.portfolio);
+      cy.openPage(Cypress.env("url") + this.data.portfolio);
       cy.viewport(1920, 1080);
     });
   });

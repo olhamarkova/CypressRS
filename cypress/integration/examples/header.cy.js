@@ -2,7 +2,7 @@
 
 import { Header } from "../../page-object/page-object-header.js";
 import { contacts } from "../../fixtures/contacts-data.js";
-import { text } from "../../fixtures/texts.js";
+import { text } from "../../fixtures/textsUA.js";
 
 const header = new Header();
 
@@ -10,7 +10,7 @@ describe("Check the Header on Desktop", function () {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.mainPage);
+      cy.openPage(Cypress.env("url"));
       cy.viewport(1920, 1080);
     });
   });
@@ -40,7 +40,7 @@ describe("Check the Header on Mobile Screen", function () {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.mainPage);
+      cy.openPage(Cypress.env("url"));
       cy.viewport(360, 800);
     });
   });

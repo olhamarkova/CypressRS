@@ -3,7 +3,7 @@
 import { MainPage } from "../../page-object/page-object-main.js";
 import { SharedModules } from "../../page-object/shared-modules.js";
 import { Blog } from "../../page-object/page-object-blog.js";
-import { text } from "../../fixtures/texts.js";
+import { text } from "../../fixtures/textsUA.js";
 
 const mainPage = new MainPage();
 const modules = new SharedModules();
@@ -13,7 +13,7 @@ describe("Check the Main Page on Desktop", () => {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.mainPage);
+      cy.openPage(Cypress.env("url"));
       cy.viewport(1920, 1080);
     });
   });
@@ -110,7 +110,7 @@ describe("Check the Main Page on Mobile Screen", () => {
   beforeEach(function () {
     cy.fixture("page-data").then(function (data) {
       this.data = data;
-      cy.openPage(this.data.mainPage);
+      cy.openPage(Cypress.env("url"));
       cy.viewport(360, 800);
     });
   });
