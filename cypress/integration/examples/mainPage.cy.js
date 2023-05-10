@@ -4,10 +4,12 @@ import { MainPage } from "../../page-object/page-object-main.js";
 import { SharedModules } from "../../page-object/shared-modules.js";
 import { Blog } from "../../page-object/page-object-blog.js";
 import { text } from "../../fixtures/textsUA.js";
+import { Menu } from "../../page-object/page-object-menu.js";
 
 const mainPage = new MainPage();
 const modules = new SharedModules();
 const articlePage = new Blog();
+const menu = new Menu();
 
 describe("Check the Main Page on Desktop", () => {
   beforeEach(function () {
@@ -16,6 +18,15 @@ describe("Check the Main Page on Desktop", () => {
       cy.openPage(Cypress.env("url"));
       cy.viewport(1920, 1080);
     });
+  });
+
+  it("Check the Change Language Option", function () {
+    menu.elements.chooseLanguageUkr().should("be.visible");
+    menu.elements.chooseLanguageRu().should("be.hidden");
+    menu.elements.chooseLanguageUkr().trigger("mouseover");
+    menu.elements.chooseLanguageRu().click({ force: true });
+    cy.url().should("include", "ru");
+    menu.elements.chooseLanguageRu().should("be.visible");
   });
 
   it("Check the Catalog button in Hero Section", () => {
