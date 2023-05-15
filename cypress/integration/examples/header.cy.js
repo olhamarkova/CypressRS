@@ -1,10 +1,12 @@
 /// <reference types="cypress" />
 
 import { Header } from "../../page-object/page-object-header.js";
+import { Menu } from "../../page-object/page-object-menu.js";
 import { contacts } from "../../fixtures/contacts-data.js";
 import { text } from "../../fixtures/textsUA.js";
 
 const header = new Header();
+const mainMenu = new Menu();
 
 describe("Check the Header on Desktop", function () {
   beforeEach(function () {
@@ -34,6 +36,11 @@ describe("Check the Header on Desktop", function () {
     header.elements.email().should("have.text", contacts.email);
     header.elements.schedule().should("include.text", text.schedule);
   });
+
+  it("Check the Main Menu", function () {
+    mainMenu.elements.mainMenu().should("be.visible");
+    mainMenu.validateMainMenu();
+  });
 });
 
 describe("Check the Header on Mobile Screen", function () {
@@ -50,6 +57,7 @@ describe("Check the Header on Mobile Screen", function () {
   });
 
   it("Check the Mobile Menu", function () {
+    mainMenu.elements.mainMenu().should("not.be.visible");
     header.elements.mobileMenu().should("be.visible");
   });
 });
