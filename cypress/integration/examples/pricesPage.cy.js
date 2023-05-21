@@ -29,4 +29,12 @@ describe("Check the Prices Page on Desktop", () => {
       .should("have.length", 6)
       .and("have.attr", "href");
   });
+
+  it("Check the File Download", () => {
+    pricesPage.elements.downloadDocumentIcon().eq(1).click({ force: true });
+    cy.readFile(
+      Cypress.config("fileServerFolder") +
+        "/cypress/downloads/prays_vazy_2023_hrivna.pdf"
+    ).should("exist");
+  });
 });

@@ -1,9 +1,9 @@
 const { defineConfig } = require("cypress");
 
 module.exports = defineConfig({
-  projectId: 'ftt4p6',
+  projectId: "ftt4p6",
   env: {
-    url: "https://test.andygroove.com/royalstone/",
+    url: "https://granit-royalstone.com/",
   },
   e2e: {
     setupNodeEvents(on, config) {
