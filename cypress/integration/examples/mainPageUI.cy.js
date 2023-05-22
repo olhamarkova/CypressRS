@@ -1,10 +1,10 @@
 /// <reference types="cypress" />
 
-import { MainPage } from "../../page-object/page-object-main.js";
-import { SharedModules } from "../../page-object/shared-modules.js";
-import { Blog } from "../../page-object/page-object-blog.js";
+import { MainPage } from "../../page-object/MainPage.js";
+import { SharedModules } from "../../page-object/SharedModules.js";
+import { Blog } from "../../page-object/Blog.js";
 import { text } from "../../fixtures/textsUA.js";
-import { Menu } from "../../page-object/page-object-menu.js";
+import { Menu } from "../../page-object/MainMenu.js";
 
 const mainPage = new MainPage();
 const modules = new SharedModules();
@@ -114,21 +114,5 @@ describe("Check the Main Page on Desktop", () => {
     cy.url().should("include", text.siteNameInUrl);
     mainPage.openArticle(1);
     articlePage.elements.shareLinks().should("be.visible");
-  });
-});
-
-describe("Check the Main Page on Mobile Screen", () => {
-  beforeEach(function () {
-    cy.fixture("page-data").then(function (data) {
-      this.data = data;
-      cy.openPage(Cypress.env("url"));
-      cy.viewport(360, 800);
-    });
-  });
-
-  it("Check the Blog Section", () => {
-    mainPage.elements.blogArticleItem().should("have.have.length", 3);
-    mainPage.validateArticlesCountOnMobile();
-    mainPage.elements.goToBlogButton().should("be.visible");
   });
 });

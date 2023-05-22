@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
 
-import { Filter } from "../../page-object/page-object-filter";
-import { Menu } from "../../page-object/page-object-menu";
-import { Catalog } from "../../page-object/page-object-catalog";
-import { SharedModules } from "../../page-object/shared-modules";
+import { Filter } from "../../page-object/Filter.js";
+import { Menu } from "../../page-object/MainMenu.js";
+import { Catalog } from "../../page-object/CatalogMainPage.js";
+import { SharedModules } from "../../page-object/SharedModules.js";
 
 const filter = new Filter();
 const mainMenu = new Menu();

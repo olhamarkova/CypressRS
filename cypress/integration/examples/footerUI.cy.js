@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { Footer } from "../../page-object/page-object-footer.js";
+import { Footer } from "../../page-object/Footer.js";
 import { text } from "../../fixtures/textsUA.js";
 
 const footer = new Footer();

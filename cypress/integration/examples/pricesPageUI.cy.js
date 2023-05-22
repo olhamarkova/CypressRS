@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { Prices } from "../../page-object/page-object-prices.js";
+import { Prices } from "../../page-object/Prices.js";
 
 const pricesPage = new Prices();
 

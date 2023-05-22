@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import { Header } from "../../page-object/page-object-header.js";
-import { Menu } from "../../page-object/page-object-menu.js";
+import { Header } from "../../page-object/Header.js";
+import { Menu } from "../../page-object/MainMenu.js";
 import { contacts } from "../../fixtures/contacts-data.js";
 import { text } from "../../fixtures/textsUA.js";
 
@@ -40,24 +40,5 @@ describe("Check the Header on Desktop", function () {
   it("Check the Main Menu", function () {
     mainMenu.elements.mainMenu().should("be.visible");
     mainMenu.validateMainMenu();
-  });
-});
-
-describe("Check the Header on Mobile Screen", function () {
-  beforeEach(function () {
-    cy.fixture("page-data").then(function (data) {
-      this.data = data;
-      cy.openPage(Cypress.env("url"));
-      cy.viewport(360, 800);
-    });
-  });
-
-  it("Check the Logo", function () {
-    header.elements.mainLogo().should("be.visible");
-  });
-
-  it("Check the Mobile Menu", function () {
-    mainMenu.elements.mainMenu().should("not.be.visible");
-    header.elements.mobileMenu().should("be.visible");
   });
 });

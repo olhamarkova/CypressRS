@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { PortfolioPage } from "../../page-object/page-object-portf.js";
+import { PortfolioPage } from "../../page-object/Portfolio.js";
 
 const portfolio = new PortfolioPage();
 

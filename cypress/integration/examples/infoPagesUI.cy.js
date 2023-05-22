@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { ProductPage } from "../../page-object/page-object-info.js";
+import { ProductPage } from "../../page-object/InfoPages.js";
 
 const productPage = new ProductPage();
 

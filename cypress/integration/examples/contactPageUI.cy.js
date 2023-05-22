@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
-import { ContactsPage } from "../../page-object/page-object-contacts.js";
-import { SharedModules } from "../../page-object/shared-modules.js";
+import { ContactsPage } from "../../page-object/Contacts.js";
+import { SharedModules } from "../../page-object/SharedModules.js";
 import { contacts } from "../../fixtures/contacts-data.js";
 import { text } from "../../fixtures/textsUA.js";
 

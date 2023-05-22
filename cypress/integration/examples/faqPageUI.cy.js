@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { FAQPage } from "../../page-object/page-object-faq.js";
+import { FAQPage } from "../../page-object/FAQ.js";
 import { text } from "../../fixtures/textsUA.js";
 
 const FAQ = new FAQPage();

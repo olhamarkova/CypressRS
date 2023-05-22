@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { Delivery } from "../../page-object/page-object-delivery.js";
+import { Delivery } from "../../page-object/Delivery.js";
 import { text } from "../../fixtures/textsUA.js";
 
 const delivPage = new Delivery();

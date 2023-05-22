@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { Blog } from "../../page-object/page-object-blog.js";
+import { Blog } from "../../page-object/Blog.js";
 
 const blogPage = new Blog();
 
