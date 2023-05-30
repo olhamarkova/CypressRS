@@ -33,7 +33,7 @@ export class Menu {
     blogMenuItem: () => cy.get("#menu-item-87 a"),
     partnersMenuItem: () => cy.get("#menu-item-94 a"),
     answersMenuItem: () => cy.get("#menu-item-86 a"),
-    contactsPortfolioItem: () => cy.get("#menu-item-90 a"),
+    contactsMenuItem: () => cy.get("#menu-item-90 a"),
   };
 
   validateMainMenu() {

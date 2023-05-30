@@ -10,5 +10,6 @@ module.exports = defineConfig({
       // implement node event listeners here
     },
     specPattern: "cypress/integration/examples/*.cy.js",
+    watchForFileChanges: false,
   },
 });
