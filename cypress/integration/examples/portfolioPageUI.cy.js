@@ -14,7 +14,7 @@ describe("Check the Portfolio Page on Desktop", () => {
   });
 
   it("Check the gallery", () => {
-    portfolio.elements.galleryImage().should("have.length", 20);
+    portfolio.elements.galleryImage().should("have.length", 24);
     portfolio.openGallery(2);
     portfolio.elements.nextPhotoButton().should("be.visible");
     portfolio.swipePhotos();
