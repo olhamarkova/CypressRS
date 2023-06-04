@@ -20,9 +20,7 @@ describe("Check the customer happy path - Partnership", function () {
   });
 
   it("Partnership happy path", function () {
-    partners.elements.productsGallerySection().should("be.visible");
-    partners.elements.benefitsSection().should("be.visible");
-    partners.elements.tilesGallerySection().should("be.visible");
+    partners.validatePageBlocks();
     modules.elements.mainCTASection().should("be.visible");
     modules.elements.mainCTABorderButton().click();
     cy.url().should("include", this.data.catalog);

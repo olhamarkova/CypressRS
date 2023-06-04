@@ -6,4 +6,10 @@ export class Partnership {
     benefitsSection: () => cy.get("#benefits"),
     tilesGallerySection: () => cy.get("#530"),
   };
+
+  validatePageBlocks() {
+    this.elements.productsGallerySection().should("be.visible");
+    this.elements.benefitsSection().should("be.visible");
+    this.elements.tilesGallerySection().should("be.visible");
+  }
 }
